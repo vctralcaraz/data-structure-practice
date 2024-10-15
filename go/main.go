@@ -30,6 +30,23 @@ func (l *LinkedList) add(data string) {
 
 func (l *LinkedList) remove(data string) {
 
+	i := l.head
+	if l.head.data == data {
+		l.head = i.next
+		i = nil
+		l.size--
+		return
+	} else {
+		for ; i.next != nil; i = i.next {
+			if i.next.data == data {
+				j := i.next
+				i.next = j.next
+				j = nil
+				l.size--
+				return
+			}
+		}
+	}
 }
 
 func (l LinkedList) get(data string) *Node {
@@ -57,14 +74,22 @@ func (l LinkedList) printAll() {
 func main() {
 	states := new(LinkedList)
 
-	states.printAll()
-	fmt.Println(states.size)
-
 	states.add("California")
 	states.add("Arizona")
 	states.add("Nevada")
 	states.add("Washington")
 	states.add("Oregon")
+	states.add("Colorado")
+
+	states.printAll()
+	fmt.Println("size:", states.size)
+	fmt.Println("")
+
+	states.remove("California")
+
+	states.printAll()
+	fmt.Println("size:", states.size)
+	fmt.Println("")
 
 	state := states.get("Texas")
 	if state == nil {
@@ -73,13 +98,10 @@ func main() {
 		fmt.Println("The state you are looking for is at ", state)
 	}
 
-	state = states.get("Nevada")
+	state = states.get("Colorado")
 	if state == nil {
 		fmt.Println("The state you are looking for doesn't exist")
 	} else {
 		fmt.Println("The state you are looking for is at ", state)
 	}
-
-	states.printAll()
-	fmt.Println(states.size)
 }
