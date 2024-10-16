@@ -12,6 +12,17 @@ type LinkedList struct {
 	size int
 }
 
+/*
+	I will need to find more methods here - https://www.w3schools.com/java/java_ref_linkedlist.asp
+*/
+
+/*	**Insertion Methods**
+	addFirst(data)
+	addLast(data)
+	addAtIndex(data, index)
+*/
+func (l *LinkedList) addFirst(data string) {}
+
 func (l *LinkedList) addLast(data string) {
 
 	temp := new(Node)
@@ -27,6 +38,18 @@ func (l *LinkedList) addLast(data string) {
 	}
 	l.size++
 }
+
+func (l *LinkedList) addAtIndex(data string, index int) {}
+
+/*	**Deletion Methods**
+	removeFirst()
+	removeLast()
+	removeAtIndex(index)
+	remove(data) - removes the first node containing the specified data
+*/
+func (l *LinkedList) removeFirst() {}
+func (l *LinkedList) removeLast() {}
+func (l *LinkedList) removeAtIndex(index int) {}
 
 func (l *LinkedList) remove(data string) {
 
@@ -49,7 +72,17 @@ func (l *LinkedList) remove(data string) {
 	}
 }
 
-func (l LinkedList) get(data string) *Node {
+/*	**Search Methods**
+	contains(data)		checks if the list contains a node with the specified data - returns true or false
+	indexOf(data)		Returns the index of the first node containing the specified data
+	get(index)		returns the data stored in the node at the specified index
+	search(data)		returns the data of the first node containing the specified data
+*/
+func (l LinkedList) contains(data string) bool { return false }
+func (l LinkedList) indexOf(data string) int { return -1 }
+func (l LinkedList) get(index int) *Node { return nil }
+
+func (l LinkedList) search(data string) *Node {
 
 	i := l.head
 	for ; i != nil; i = i.next {
@@ -60,6 +93,9 @@ func (l LinkedList) get(data string) *Node {
 	return nil
 }
 
+/*	**Traversal Methods**
+	printAll()
+*/
 func (l LinkedList) printAll() {
 	if l.size > 0 {
 		i := l.head
@@ -70,6 +106,15 @@ func (l LinkedList) printAll() {
 		fmt.Println("This list is empty")
 	}
 }
+
+/*	**Misc Methods**
+	isEmpty()		checks if the list is empty - returns true or false
+	getSize()		returns the number of nodes in the list
+	reverse()		Reverses the order of the nodes in the list - returns a new list
+*/
+func (l LinkedList) isEmpty() bool { return false }
+func (l LinkedList) getSize() int { return 0 }
+func (l *LinkedList) reverse() {}
 
 func main() {
 	states := new(LinkedList)
@@ -91,14 +136,14 @@ func main() {
 	fmt.Println("size:", states.size)
 	fmt.Println("")
 
-	state := states.get("Texas")
+	state := states.search("Texas")
 	if state == nil {
 		fmt.Println("The state you are looking for doesn't exist")
 	} else {
 		fmt.Println("The state you are looking for is at ", state)
 	}
 
-	state = states.get("Colorado")
+	state = states.search("Colorado")
 	if state == nil {
 		fmt.Println("The state you are looking for doesn't exist")
 	} else {
