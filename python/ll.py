@@ -48,17 +48,4 @@ class LinkedList:
             i = i.next
         print("None")
 
-
-ll = LinkedList()
-
-ll.add(1)
-ll.add(2)
-ll.add(3)
-ll.add(4)
-
-ll.print_list()
-
-ll.remove(3)
-
-ll.print_list()
-print(ll.size)
+__all__ = ["LinkedList"]
