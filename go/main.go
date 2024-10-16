@@ -12,7 +12,7 @@ type LinkedList struct {
 	size int
 }
 
-func (l *LinkedList) add(data string) {
+func (l *LinkedList) addLast(data string) {
 
 	temp := new(Node)
 	temp.data = data
@@ -74,12 +74,12 @@ func (l LinkedList) printAll() {
 func main() {
 	states := new(LinkedList)
 
-	states.add("California")
-	states.add("Arizona")
-	states.add("Nevada")
-	states.add("Washington")
-	states.add("Oregon")
-	states.add("Colorado")
+	states.addLast("California")
+	states.addLast("Arizona")
+	states.addLast("Nevada")
+	states.addLast("Washington")
+	states.addLast("Oregon")
+	states.addLast("Colorado")
 
 	states.printAll()
 	fmt.Println("size:", states.size)
