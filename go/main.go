@@ -21,7 +21,19 @@ type LinkedList struct {
 	addLast(data)
 	addAtIndex(data, index)
 */
-func (l *LinkedList) addFirst(data string) {}
+func (l *LinkedList) addFirst(data string) {
+	
+	temp := new(Node)
+	temp.data = data
+
+	if l.head == nil {
+		l.head = temp
+	} else {
+		temp.next = l.head
+		l.head = temp
+	}
+	l.size++
+}
 
 func (l *LinkedList) addLast(data string) {
 
@@ -39,7 +51,32 @@ func (l *LinkedList) addLast(data string) {
 	l.size++
 }
 
-func (l *LinkedList) addAtIndex(data string, index int) {}
+func (l *LinkedList) addAtIndex(data string, index int) {
+	
+	temp := new(Node)
+	temp.data = data
+
+	if index > l.size || index < 0 {
+		fmt.Println("Index out of range\n")
+		return
+	}
+
+	if l.head == nil {
+		l.head = temp
+		l.size++
+		return
+	}
+
+	i := l.head
+	for k := 0; k < index - 1; k++ {
+		i = i.next
+	}
+
+	j := i.next
+	temp.next = j
+	i.next = temp
+	l.size++
+}
 
 /*	**Deletion Methods**
 	removeFirst()
@@ -47,8 +84,33 @@ func (l *LinkedList) addAtIndex(data string, index int) {}
 	removeAtIndex(index)
 	remove(data) - removes the first node containing the specified data
 */
-func (l *LinkedList) removeFirst() {}
-func (l *LinkedList) removeLast() {}
+func (l *LinkedList) removeFirst() {
+	
+	if l.head != nil {
+		i := l.head
+		l.head = i.next
+		i = nil
+		l.size--
+		return
+	}
+
+	fmt.Println("Nothing to remove")
+}
+func (l *LinkedList) removeLast() {
+	
+	if l.head != nil {
+		i := l.head
+		for ; i.next.next != nil; i = i.next {}
+		j := i.next
+		i.next = nil
+		fmt.Println("Deleted", j.data)
+		j = nil
+		l.size--
+		return
+	}
+
+	fmt.Println("Nothing to remove")
+}
 func (l *LinkedList) removeAtIndex(index int) {}
 
 func (l *LinkedList) remove(data string) {
@@ -119,6 +181,7 @@ func (l *LinkedList) reverse() {}
 func main() {
 	states := new(LinkedList)
 
+
 	states.addLast("California")
 	states.addLast("Arizona")
 	states.addLast("Nevada")
@@ -126,12 +189,21 @@ func main() {
 	states.addLast("Oregon")
 	states.addLast("Colorado")
 
+	states.addFirst("Florida")
+
+	states.addAtIndex("Georgia", 5)
+
 	states.printAll()
 	fmt.Println("size:", states.size)
 	fmt.Println("")
 
 	states.remove("California")
 
+	states.printAll()
+	fmt.Println("size:", states.size)
+	fmt.Println("")
+
+	states.removeLast()
 	states.printAll()
 	fmt.Println("size:", states.size)
 	fmt.Println("")
