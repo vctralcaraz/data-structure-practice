@@ -111,7 +111,29 @@ func (l *LinkedList) removeLast() {
 
 	fmt.Println("Nothing to remove")
 }
-func (l *LinkedList) removeAtIndex(index int) {}
+func (l *LinkedList) removeAtIndex(index int) {
+
+	if index > l.size || index < 0 {
+		fmt.Println("Index out of range\n")
+		return
+	}
+
+	if l.size == 0 {
+		fmt.Println("This list is empty")
+		return
+	}
+
+	i := l.head
+	for k := 0; k < index - 1; k++ {
+		i = i.next
+	}
+
+	j := i.next
+	i.next = i.next.next
+	fmt.Println("Deleted", j.data)
+	j = nil
+	l.size--
+}
 
 func (l *LinkedList) remove(data string) {
 
@@ -208,6 +230,11 @@ func main() {
 	fmt.Println("size:", states.size)
 	fmt.Println("")
 
+	states.removeAtIndex(2)
+	states.printAll()
+	fmt.Println("size:", states.size)
+	fmt.Println("")
+	
 	state := states.search("Texas")
 	if state == nil {
 		fmt.Println("The state you are looking for doesn't exist")
